@@ -1,12 +1,13 @@
 'use strict'
 
 let _objects = {
-    'functions':[],
-    'classes'  :[],
-    'ids'      :[],
-    'names'    :[],
-    'langs'    :[]
+    'functions':{},
+    'classes'  :{},
+    'ids'      :{},
+    'names'    :{},
+    'langs'    :{}
 }
+
 let _tags = {
     'functions':'F',
     'classes'  :'C',
@@ -47,7 +48,10 @@ const _add = function(obj, tag){
         throw Error('Invalid tag "'+tag+'"');
     if(_objects[tag].indexof(obj))
         return false;
-    _objects[tag].push(obj);
+    _objects[tag][obj] = (
+        _tags[tag]+
+        _serials[tag].toString()
+    );
     _serials[tag]++;
 }
 
@@ -58,7 +62,7 @@ const _add = function(obj, tag){
 const _clean = function(){
     for(let i in _objects){
         delete _objects[i];
-        objects[i]=[];
+        objects[i]={};
     }
     for(let i in _serialss)
         serieals[i]=0;
