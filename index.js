@@ -22,14 +22,20 @@ let _serials = {
     'names'    : 0,
     'langs'    : 0
 }
-let sample = 
+let _sample = 
     'functions':'DF_',
     'classes'  :'DC_',
     'ids'      :'DI_',
     'names'    :'DN_',
     'langs'    :'DL_'
 }
+let _revers = {};
 
+const _reverser = function(){
+    for(let i in _sample)
+        _reverse[sample[i]] = i;
+
+}
 
 /*
  * @pram {string}
@@ -69,9 +75,21 @@ const _clean = function(){
 }
 
 
+const _get = function(obj){
+    let rev_tag = obj.substring(0,3);
+    if(typeof _revers[rev_tag] === 'undefined')
+        throw TypeError('Invalid obj "'+obj+'"');
+    let tag = _revers[rev_tag];
+    if(typeof _objects[tag][obj] ==='undefined')
+        throw Error('object not exist');
+    return _objects[tag][obj];
+}
+
 const tagshorterBase = class{
     add(tag, obj){
         return _add(tag, obj);
+    }
+    get(obj){
     }
     clean(){
         clean();
